@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor: 1.5
+  data_vencimento: 2021-11-09
+  enrollment: one
+  status: MyText
+
+two:
+  valor: 1.5
+  data_vencimento: 2021-11-09
+  enrollment: two
+  status: MyText
