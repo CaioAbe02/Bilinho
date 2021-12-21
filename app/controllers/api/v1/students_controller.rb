@@ -1,7 +1,7 @@
 module Api
-  module V1    
+  module V1
     class StudentsController < ApplicationController
-      before_action :set_student, only: [:show, :update, :destroy]
+      before_action :set_student, only: %i[show update destroy]
 
       # GET /students
       def index
@@ -20,9 +20,10 @@ module Api
         @student = Student.new(student_params)
 
         if @student.save
-          render json: {status: 'SUCCESS', message:'Saved student', data:@student},status: :ok
+          render json: { status: 'SUCCESS', message: 'Saved student', data: @student }, status: :ok
         else
-          render json: {status: 'ERROR', message:'Student not saved', data:@student.errors},status: :unprocessable_entity
+          render json: { status: 'ERROR', message: 'Student not saved', data: @student.errors },
+                 status: :unprocessable_entity
         end
       end
 
@@ -41,15 +42,16 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_student
-          @student = Student.find(params[:id])
-        end
 
-        # Only allow a list of trusted parameters through.
-        def student_params
-          params.require(:student).permit(:nome, :cpf, :data_nascimento, :celular, :genero, :meio_pagamento_bills)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_student
+        @student = Student.find(params[:id])
+      end
+
+      # Only allow a list of trusted parameters through.
+      def student_params
+        params.require(:student).permit(:nome, :cpf, :data_nascimento, :celular, :genero, :meio_pagamento_bills)
+      end
     end
   end
 end

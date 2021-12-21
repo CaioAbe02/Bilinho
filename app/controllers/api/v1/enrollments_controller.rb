@@ -1,7 +1,7 @@
 module Api
   module V1
     class EnrollmentsController < ApplicationController
-      before_action :set_enrollment, only: [:show, :update, :destroy]
+      before_action :set_enrollment, only: %i[show update destroy]
 
       # GET /enrollments
       def index
@@ -16,13 +16,14 @@ module Api
       end
 
       # POST /enrollments
-      def create        
+      def create
         @enrollment = Enrollment.new(enrollment_params)
 
         if @enrollment.save
-          render json: {status: 'SUCCESS', message:'Saved enrollment', data:@enrollment},status: :ok
+          render json: { status: 'SUCCESS', message: 'Saved enrollment', data: @enrollment }, status: :ok
         else
-          render json: {status: 'ERROR', message:'Enrollment not saved', data:@enrollment.errors},status: :unprocessable_entity
+          render json: { status: 'ERROR', message: 'Enrollment not saved', data: @enrollment.errors },
+                 status: :unprocessable_entity
         end
       end
 
@@ -41,15 +42,17 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_enrollment
-          @enrollment = Enrollment.find(params[:id])
-        end
 
-        # Only allow a list of trusted parameters through.
-        def enrollment_params
-          params.require(:enrollment).permit(:valor_curso, :qtd_bills, :dia_vencimento_bill, :nome_curso, :institution_id, :enrollment_id)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_enrollment
+        @enrollment = Enrollment.find(params[:id])
+      end
+
+      # Only allow a list of trusted parameters through.
+      def enrollment_params
+        params.require(:enrollment).permit(:valor_curso, :qtd_bills, :dia_vencimento_bill, :nome_curso,
+                                           :institution_id, :enrollment_id)
+      end
     end
   end
 end

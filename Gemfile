@@ -11,8 +11,10 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 # pry
 gem 'pry-rails'
-# timeliness 
+# timeliness
 gem 'validates_timeliness', '~> 6.0.0.alpha1'
+# RuboCop
+gem 'rubocop', require: false
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
@@ -32,7 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -42,4 +44,4 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

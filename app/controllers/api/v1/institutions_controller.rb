@@ -1,7 +1,7 @@
 module Api
   module V1
     class InstitutionsController < ApplicationController
-      before_action :set_institution, only: [:show, :update, :destroy]
+      before_action :set_institution, only: %i[show update destroy]
 
       # GET /institutions
       def index
@@ -20,9 +20,10 @@ module Api
         @institution = Institution.new(institution_params)
 
         if @institution.save
-          render json: {status: 'SUCCESS', message:'Saved institution', data:@institution},status: :ok
+          render json: { status: 'SUCCESS', message: 'Saved institution', data: @institution }, status: :ok
         else
-          render json: {status: 'ERROR', message:'Institution not saved', data:@institution.errors},status: :unprocessable_entity
+          render json: { status: 'ERROR', message: 'Institution not saved', data: @institution.errors },
+                 status: :unprocessable_entity
         end
       end
 
@@ -41,15 +42,16 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_institution
-          @institution = Institution.find(params[:id])
-        end
 
-        # Only allow a list of trusted parameters through.
-        def institution_params
-          params.require(:institution).permit(:nome, :cnpj, :tipo)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_institution
+        @institution = Institution.find(params[:id])
+      end
+
+      # Only allow a list of trusted parameters through.
+      def institution_params
+        params.require(:institution).permit(:nome, :cnpj, :tipo)
+      end
     end
   end
 end
