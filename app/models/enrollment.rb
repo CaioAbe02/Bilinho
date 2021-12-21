@@ -9,8 +9,8 @@ class Enrollment < ApplicationRecord
   validates :dia_vencimento_bill,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 31 }
   validates :nome_curso, presence: true
-  validates :institution_id, presence: true
-  validates :student_id, presence: true
+  #validates :institution_id, presence: true
+  #validates :student_id, presence: true
 
   private
 

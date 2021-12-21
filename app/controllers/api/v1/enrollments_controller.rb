@@ -17,7 +17,7 @@ module Api
 
       # POST /enrollments
       def create
-        @enrollment = Enrollment.new(enrollment_params)
+        @enrollment = Enrollment.create(enrollment_params)
 
         if @enrollment.save
           render json: { status: 'SUCCESS', message: 'Saved enrollment', data: @enrollment }, status: :ok
@@ -51,7 +51,7 @@ module Api
       # Only allow a list of trusted parameters through.
       def enrollment_params
         params.require(:enrollment).permit(:valor_curso, :qtd_bills, :dia_vencimento_bill, :nome_curso,
-                                           :institution_id, :enrollment_id)
+                                           :institution_id, :student_id, :enrollment_id)
       end
     end
   end
